@@ -27,7 +27,7 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     ViewController *vc = [ViewController new];
-    vc.name = @"rootVC";
+    vc.title = @"rootVC";
     self.nvc = [[NavController alloc] initWithRootViewController:vc];
     self.window.rootViewController = self.nvc;
     [self.window makeKeyAndVisible];
