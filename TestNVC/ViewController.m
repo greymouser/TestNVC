@@ -9,16 +9,30 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-
+@property (readwrite,nonatomic) NSInteger level;
 @end
 
+
+#define LOG_WILL_DID_MTPVC 0
+#define LOG_WILL_DID_MTPVC_LEAVING_AND_NVC_WILL_DID_SHOW_VC 1
+
+
 @implementation ViewController
+
+- (instancetype)init
+{
+    self = [super init];
+    if (!self) return nil;
+
+    self.level = LOG_WILL_DID_MTPVC_LEAVING_AND_NVC_WILL_DID_SHOW_VC;
+    
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.title = self.name;
     
     self.view.backgroundColor = [UIColor redColor];
 
@@ -48,8 +62,8 @@
 - (void)pushIt:(id)sender
 {
     ViewController *vc = [ViewController new];
-    vc.name = [NSString stringWithFormat:@"%ld",
-               (unsigned long)[self.navigationController.viewControllers count]];
+    vc.title = [NSString stringWithFormat:@"%ld",
+                (unsigned long)[self.navigationController.viewControllers count]];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -61,12 +75,24 @@
 
 - (void)willMoveToParentViewController:(UIViewController *)parent
 {
-    NSLog(@"vc(%@) willMoveToParentViewController: parent? %@", self.name, parent?@"YES":@"NO");
+    if (self.level == 0) {
+        NSLog(@"-[vc(%@) willMoveToParentViewController [%@]", self.title, parent?@"entering":@"leaving");
+    }
+    
+    if (self.level == 1 && !parent) {
+        NSLog(@"-[vc(%@) willMoveToParentViewController [%@]", self.title, @"leaving");
+    }
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
-    NSLog(@"vc(%@) didMoveToParentViewController: parent? %@", self.name, parent?@"YES":@"NO");
+    if (self.level == 0) {
+        NSLog(@"-[vc(%@) didMoveToParentViewController [%@]", self.title, parent?@"entering":@"leaving");
+    }
+    
+    if (self.level == 1 && !parent) {
+        NSLog(@"-[vc(%@) didMoveToParentViewController [%@]", self.title, @"leaving");
+    }
 }
 
 @end

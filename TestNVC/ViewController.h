@@ -10,7 +10,7 @@
 
 @interface ViewController : UIViewController
 
-@property (nonatomic) NSString *name;
+@property (readonly,nonatomic) NSInteger level;
 
 @end
 
