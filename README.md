@@ -22,10 +22,10 @@ Simulator, iPhone 6, 8.3
 
 ### Test steps
 
- 1) Set the log level
- 2) Compile and run
- 3) Push VC, push vc, pop vc, pop vc
- 4) Collect logs
+ 1. Set the log level
+ 2. Compile and run
+ 3. Push VC, push vc, pop vc, pop vc
+ 4. Collect logs
 
 ## Results
 
